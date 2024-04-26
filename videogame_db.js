@@ -28,10 +28,14 @@ const expressSession = require('express-session')
 const csrf = require('csurf')
 const path = require('path');
 
+const indexRouter = require('./routes/index');
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser(credentials.cookieSecret));
+
+app.use('/', indexRouter);
 
 app.use(expressSession({
     secret: credentials.cookieSecret,
